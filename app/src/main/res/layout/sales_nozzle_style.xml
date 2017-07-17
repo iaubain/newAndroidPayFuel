@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_service_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nozzleIc"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="3dp">
+
+                    <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+                        android:id="@+id/indexes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nozzleName"
+                        android:layout_marginTop="12dp"
+                        android:layout_toStartOf="@+id/overflow"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/service_title_padding"
+                        android:paddingRight="@dimen/service_title_padding"
+                        android:text="Nozzle indexes"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/overflow"
+                        android:layout_width="@dimen/ic_service_overflow_width"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/ic_service_overflow_margin_top"
+                        android:contentDescription="@string/overflowImageDesc"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_dots"
+                        android:tint="@color/colorDarkGray"
+                        android:visibility="gone" />
+
+                    <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+                        android:id="@+id/nozzleName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/overflow"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/service_title_padding"
+                        android:paddingRight="@dimen/service_title_padding"
+                        android:text="My nozzle"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="21sp"
+                        android:textStyle="bold"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/nozzleIc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_cover_height"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:contentDescription="@string/serviceIconDesc"
+                android:padding="9dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_nozzle_selected" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

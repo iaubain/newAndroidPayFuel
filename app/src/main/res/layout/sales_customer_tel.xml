@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:text="Telephone"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleBar"
+            android:layout_margin="9dp"
+            android:orientation="horizontal"
+            android:padding="3dp">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5">
+            <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                android:id="@+id/tel"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:inputType="phone"
+                android:lines="1"
+                android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/tap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="3dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_nfc" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+                android:id="@+id/cancel"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/button_selectable_red"
+                android:text="CANCEL"
+                android:textColor="@drawable/text_selectable_red"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+                android:id="@+id/ok"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/button_selectable_green"
+                android:text="OK"
+                android:textColor="@drawable/text_selectable_green"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

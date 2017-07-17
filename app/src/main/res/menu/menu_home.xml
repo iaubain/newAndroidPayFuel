@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.oltranz.pf.n_payfuel.Home">
+    <item
+        android:id="@+id/action_admin"
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_admin_white"
+        android:orderInCategory="100"
+        android:title="Admin App"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_login"
+        android:icon="@drawable/ic_login"
+        android:orderInCategory="100"
+        android:title="Login"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_register"
+        android:icon="@drawable/ic_register"
+        android:orderInCategory="100"
+        android:title="Register Device"
+        app:showAsAction="never" />
+</menu>

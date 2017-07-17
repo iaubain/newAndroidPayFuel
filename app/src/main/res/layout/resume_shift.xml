@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimaryDark"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/ic_secure"
+            android:drawableTint="@color/colorWhite"
+            android:gravity="center"
+            android:text="Device locked"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:id="@+id/middleContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleBar"
+            android:layout_margin="9dp"
+            android:orientation="vertical"
+            android:padding="3dp">
+            <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="9dp"
+                android:gravity="center"
+                android:text="Logged user"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                    android:id="@+id/pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/border_gray"
+                    android:drawableLeft="@drawable/ic_secure"
+                    android:drawableStart="@drawable/ic_secure"
+                    android:drawableTint="@color/colorDarkGray"
+                    android:gravity="center"
+                    android:hint="ENTER PIN CODE"
+                    android:inputType="numberPassword"
+                    android:maxLength="9"
+                    android:maxLines="1"
+                    android:padding="9dp" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+        <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+            android:id="@+id/ok"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/middleContent"
+            android:layout_margin="9dp"
+            android:background="@drawable/button_selectable_green"
+            android:text="OK"
+            android:textColor="@drawable/text_selectable_green"
+            android:textSize="28sp" />
+    </RelativeLayout>
+
+</LinearLayout>

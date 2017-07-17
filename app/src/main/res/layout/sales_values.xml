@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/confirLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary">
+        <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+            android:id="@+id/dialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/icClose"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Amount or Quantity"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/icClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:padding="8dp"
+            android:src="@drawable/ic_close"/>
+    </RelativeLayout>
+
+    <TableRow
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:gravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+                android:id="@+id/ok"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/button_selectable_green"
+                android:text="NEXT"
+                android:textColor="@drawable/text_selectable_green"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </TableRow>
+
+    <LinearLayout
+        android:id="@+id/dialogContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/topBar"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="3dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+                android:id="@+id/label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:text="Detalis"/>
+            <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+                android:id="@+id/labelValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:text="Values"/>
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/border_gray"
+                android:drawableLeft="@drawable/ic_amount"
+                android:gravity="center"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:padding="9dp"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+        </android.support.design.widget.TextInputLayout>
+        <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+            android:id="@+id/qty"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/border_gray"
+            android:drawableLeft="@drawable/ic_quantity"
+            android:gravity="center"
+            android:padding="9dp"
+            android:text="Quantity"/>
+        <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+            android:id="@+id/more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:gravity="right"
+            android:text="View more"
+            android:textSize="15sp"/>
+        <ScrollView
+            android:id="@+id/moreContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="9dp"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                    android:id="@+id/numberPlate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center"
+                    android:hint="Number Plate"
+                    android:maxLines="1"
+                    android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                    android:id="@+id/tin"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center"
+                    android:hint="TIN Number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                    android:id="@+id/company"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center"
+                    android:hint="Company Name"
+                    android:maxLines="1"
+                    android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

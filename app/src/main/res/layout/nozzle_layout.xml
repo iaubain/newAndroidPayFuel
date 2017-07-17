@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pumpLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary">
+        <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+            android:id="@+id/dialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="CHOOSE NOZZLE"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <TableRow
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:gravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+                android:id="@+id/ok"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/button_selectable_green"
+                android:text="DONE"
+                android:textColor="@drawable/text_selectable_green"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </TableRow>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mNozzleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/topBar"
+        android:layout_marginTop="6dp"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:padding="3dp"
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

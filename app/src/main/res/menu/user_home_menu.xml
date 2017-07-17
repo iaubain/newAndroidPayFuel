@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/action_transaction"
+            android:icon="@drawable/ic_transactions"
+            android:title="Transactions" />
+        <item
+            android:id="@+id/action_report"
+            android:icon="@drawable/ic_reports"
+            android:title="Report" />
+    </group>
+
+    <item android:title="Other">
+        <menu>
+            <item
+                android:id="@+id/action_pause_session"
+                android:icon="@drawable/ic_shiftpause"
+                android:title="Pause shift" />
+            <item
+                android:id="@+id/action_end_shift"
+                android:icon="@drawable/ic_shifttend"
+                android:title="End shift" />
+        </menu>
+    </item>
+
+</menu>

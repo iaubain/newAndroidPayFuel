@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+    xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mDate"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="12dp"
+    android:padding="9dp"/>

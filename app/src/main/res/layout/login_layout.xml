@@ -1,0 +1,76 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.oltranz.pf.n_payfuel.fragments.Login">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarAlwaysDrawVerticalTrack="true">
+            <ImageView
+                android:id="@+id/mainLogo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="27dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/company_logo" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mainLogo"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="30dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                        android:id="@+id/pin"
+                        android:layout_width="match_parent"
+                        android:layout_height="63dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/border_gray"
+                        android:drawableLeft="@drawable/ic_secure"
+                        android:drawableStart="@drawable/ic_secure"
+                        android:drawableTint="@color/colorDarkGray"
+                        android:gravity="center"
+                        android:hint="ENTER PIN CODE"
+                        android:inputType="numberPassword"
+                        android:maxLength="9"
+                        android:maxLines="1"
+                        android:padding="6dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/button_selectable_green"
+                    android:text="SIGN IN"
+                    android:textColor="@drawable/text_selectable_green"
+                    android:textSize="28sp" />
+                <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
+                    android:id="@+id/pinRecover"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="21dp"
+                    android:gravity="center"
+                    android:text="Forgot PIN?"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

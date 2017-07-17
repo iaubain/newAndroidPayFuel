@@ -1,0 +1,48 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.oltranz.pf.n_payfuel.fragments.HistorySales">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/searchBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="3dp">
+
+            <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/border_gray"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawableRight="@drawable/ic_search"
+                android:gravity="center"
+                android:hint="Search..."
+                android:padding="6dp"/>
+        </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/searchBox"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginStart="9dp"
+            android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:scrollbars="vertical"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+</FrameLayout>
