@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingBottom="16dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp">
         <com.oltranz.pf.n_payfuel.utilities.views.MyLabel
             android:id="@+id/titleBar"
             android:layout_width="match_parent"
@@ -16,86 +19,97 @@
             android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:text="Voucher"
+            android:layout_marginBottom="9dp"
             android:textColor="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold"/>
+
         <LinearLayout
+            android:id="@+id/voucherBlock"
+            android:layout_below="@+id/titleBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titleBar"
-            android:layout_margin="9dp"
-            android:orientation="vertical"
-            android:padding="3dp">
-
+            android:layout_marginRight="9dp"
+            android:layout_marginLeft="9dp"
+            android:orientation="horizontal">
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6">
                 <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
                     android:id="@+id/voucher"
                     android:layout_width="match_parent"
+                    android:background="@drawable/border_gray"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:gravity="center"
                     android:hint="Voucher number"
-                    android:inputType="phone"
+                    android:gravity="center"
                     android:lines="1"
                     android:maxLines="1" />
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
-                    android:id="@+id/numberPlate"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center"
-                    android:hint="Number plate"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:textAllCaps="true" />
-            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/tap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="3dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_payment_voucher" />
+
         </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/voucherBlock"
+            android:layout_marginRight="9dp"
+            android:layout_marginLeft="9dp"
+            android:orientation="vertical"
+            android:padding="3dp">
+            <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
+                android:id="@+id/numberPlate"
+                android:layout_width="match_parent"
+                android:background="@drawable/border_gray"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:hint="Number plate"
+                android:lines="1"
+                android:maxLines="1"
+                android:textAllCaps="true" />
+        </android.support.design.widget.TextInputLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:layout_marginRight="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal">
+        <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/button_selectable_red"
+            android:text="CANCEL"
+            android:textColor="@drawable/text_selectable_red"
+            android:textSize="28sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.oltranz.pf.n_payfuel.utilities.views.MyButton
-                android:id="@+id/cancel"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/button_selectable_red"
-                android:text="CANCEL"
-                android:textColor="@drawable/text_selectable_red"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-
-            <com.oltranz.pf.n_payfuel.utilities.views.MyButton
-                android:id="@+id/ok"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/button_selectable_green"
-                android:text="OK"
-                android:textColor="@drawable/text_selectable_green"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+        <com.oltranz.pf.n_payfuel.utilities.views.MyButton
+            android:id="@+id/ok"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/button_selectable_green"
+            android:text="OK"
+            android:textColor="@drawable/text_selectable_green"
+            android:textSize="28sp" />
     </LinearLayout>
-
 </LinearLayout>

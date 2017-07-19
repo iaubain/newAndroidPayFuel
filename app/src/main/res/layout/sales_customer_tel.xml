@@ -35,6 +35,7 @@
             <com.oltranz.pf.n_payfuel.utilities.views.MyEdit
                 android:id="@+id/tel"
                 android:layout_width="match_parent"
+                android:background="@drawable/border_gray"
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
@@ -64,32 +65,34 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.oltranz.pf.n_payfuel.utilities.views.MyButton
                 android:id="@+id/cancel"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="60dp"
+                android:layout_weight="1"
                 android:layout_alignParentStart="true"
-                android:layout_marginRight="4dp"
+                android:layout_marginRight="6dp"
                 android:background="@drawable/button_selectable_red"
                 android:text="CANCEL"
                 android:textColor="@drawable/text_selectable_red"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+                android:textSize="28sp" />
 
             <com.oltranz.pf.n_payfuel.utilities.views.MyButton
                 android:id="@+id/ok"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
+                android:layout_marginLeft="6dp"
                 android:background="@drawable/button_selectable_green"
                 android:text="OK"
                 android:textColor="@drawable/text_selectable_green"
                 android:textSize="28sp"
                 android:textStyle="bold" />
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

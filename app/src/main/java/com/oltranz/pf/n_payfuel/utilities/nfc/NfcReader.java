@@ -82,7 +82,7 @@ public class NfcReader implements PiccInterface {
                     dataShowString ="type:" + strCardType + "\n" + "serialNo:" + strSerialNo + "\n" + "state:" + state + "\n";
                     //showStateText.setText(stateString);
                     Log.d("My Tag", dataShowString);
-                    mListener.onNfcDraft(true, new NfcCardData(strSerialNo, mPayLoad));
+                    mListener.onNfcDraft(true, new NfcCardData(strSerialNo, mPayLoad, null));
                 }else if (msg.what == RESPONSE_APDU)	{
                     //snShowText.setText(snShowString);
                     audio.start(3000);
@@ -112,7 +112,7 @@ public class NfcReader implements PiccInterface {
                     mListener.onNfcDraft(false, "Refreshing Exc");
                 } else if(msg.what == REFRESH_M){
                     byte[] serialNo = contactlessCard.getSerialNo();
-                    mListener.onNfcDraft(true, new NfcCardData(NfcParser.byte2String(serialNo), mPayLoad));
+                    mListener.onNfcDraft(true, new NfcCardData(NfcParser.byte2String(serialNo), mPayLoad, null));
                 }
                 super.handleMessage(msg);
             }

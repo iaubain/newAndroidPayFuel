@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="justtide">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/justtide.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

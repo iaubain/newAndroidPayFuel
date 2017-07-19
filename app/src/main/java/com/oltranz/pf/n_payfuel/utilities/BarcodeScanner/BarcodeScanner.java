@@ -44,11 +44,11 @@ public class BarcodeScanner {
                 if (msg.what == REFRESH) {
                     if(barcodeResult.getResult()<0) {
                         String test = barcodeResult.getText();//"Get Timeout");
-                        System.out.println("result barcode:"+test);
+                        Log.d("BarCode","Reading results: "+test);
                         mListener.onBarcode(true, test);
                     } else {
                         decodeString = barcodeResult.getText();
-                        System.out.println("result barcode:"+decodeString);
+                        Log.d("BarCode","Reading results: "+decodeString);
                         audio.start(3000);
                         audio.play();
                         audio.stop();
@@ -57,6 +57,12 @@ public class BarcodeScanner {
                     //decodeString = "";
                 } else if (msg.what == REFRESHBUTTON){
                     //showStateText.setText("");
+                } else if(msg.what == READER_FAILS){
+                    Log.d("BarCode","Reading results: "+decodeString);
+                    audio.start(3000);
+                    audio.play();
+                    audio.stop();
+                    mListener.onBarcode(false, "Failed to read the code");
                 }
                 super.handleMessage(msg);
             }

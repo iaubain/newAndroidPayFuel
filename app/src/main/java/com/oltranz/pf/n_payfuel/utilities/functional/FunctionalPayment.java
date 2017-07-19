@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.oltranz.pf.n_payfuel.R;
 import com.oltranz.pf.n_payfuel.entities.MPayment;
 import com.oltranz.pf.n_payfuel.entities.MSales;
+import com.oltranz.pf.n_payfuel.utilities.BarcodeScanner.BarcodeScanner;
 import com.oltranz.pf.n_payfuel.utilities.adapters.GridSpacingItemDecoration;
 import com.oltranz.pf.n_payfuel.utilities.adapters.PaymentAdapter;
 import com.oltranz.pf.n_payfuel.utilities.nfc.NfcCardData;
@@ -179,16 +180,36 @@ public class FunctionalPayment implements PaymentAdapter.OnPaymentAdapter{
             MyEdit tel = null;
             MyEdit voucher = null;
             MyEdit numberPlate = null;
-            FloatingActionButton tap = null;
+            FloatingActionButton tap = (FloatingActionButton) extraDialog.findViewById(R.id.tap);
 
             if(layoutToInflate == R.layout.sales_customer_voucher){
                 voucher = (MyEdit) extraDialog.findViewById(R.id.voucher);
                 numberPlate = (MyEdit) extraDialog.findViewById(R.id.numberPlate);
                 numberPlate.setAllCaps(true);
                 numberPlate.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+
+                final MyEdit finalVoucher1 = voucher;
+                tap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mProgress("Reading the voucher");
+                        BarcodeScanner barcodeScanner = new BarcodeScanner(new BarcodeScanner.OnBarcodeScan() {
+                            @Override
+                            public void onBarcode(boolean isDone, String barcodeValue) {
+                                dismissProgress();
+                                if(!isDone){
+                                    Toast.makeText(context, "Error: "+barcodeValue, Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                finalVoucher1.setText(barcodeValue);
+                            }
+                        }, context);
+                        barcodeScanner.startReading();
+                    }
+                });
+
             }else if(layoutToInflate == R.layout.sales_customer_tel){
                 tel = (MyEdit) extraDialog.findViewById(R.id.tel);
-                tap = (FloatingActionButton) extraDialog.findViewById(R.id.tap);
 
                 final MyEdit finalTel1 = tel;
                 if (mPayment.getName().toLowerCase().contains("tigo")){
@@ -206,25 +227,38 @@ public class FunctionalPayment implements PaymentAdapter.OnPaymentAdapter{
                 tap.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        finalTel1.setText("");
-                        finalTel1.append("078");
-                        extValue = finalTel1;
+                            finalTel1.setText("");
+                            finalTel1.append("078");
+                            extValue = finalTel1;
 
-                        mProgress("Reading tag");
-                        NfcReader draftNfc = new NfcReader(new NfcReader.OnNfcDraftInteraction() {
-                            @Override
-                            public void onNfcDraft(boolean isDone, Object nfcData) {
-                                dismissProgress();
-                                if(!isDone){
-                                    Toast.makeText(context, (String) nfcData, Toast.LENGTH_SHORT).show();
-                                    return;
+                            mProgress("Reading tag");
+                            NfcReader draftNfc = new NfcReader(new NfcReader.OnNfcDraftInteraction() {
+                                @Override
+                                public void onNfcDraft(boolean isDone, Object nfcData) {
+                                    dismissProgress();
+                                    if(!isDone){
+                                        Toast.makeText(context, (String) nfcData, Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    String msisdn = ((NfcCardData)nfcData).getSerialNumber();
+                                    String serialNumber = msisdn;
+                                    //TODO remember to remove those serial number and msisdn for live application
+                                    switch (serialNumber){
+                                        case "040f87f2a44881":
+                                            msisdn = "0786367970";
+                                            break;
+                                        case "046f27ba9e3380":
+                                            msisdn = "0788251119";
+                                            break;
+                                        case "da6075fa":
+                                            msisdn = "0785534672";
+                                    }
+                                    finalTel1.setText("");
+                                    finalTel1.append(msisdn);
+                                    Toast.makeText(context, nfcData.toString(), Toast.LENGTH_SHORT).show();
                                 }
-                                finalTel1.setText("");
-                                finalTel1.append(((NfcCardData)nfcData).getPayload());
-                                Toast.makeText(context, nfcData.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        draftNfc.startReading();
+                            });
+                            draftNfc.startReading();
 
                     }
                 });
@@ -245,6 +279,7 @@ public class FunctionalPayment implements PaymentAdapter.OnPaymentAdapter{
                             finalNumberPlate.setError("Invalid number plate");
                             return;
                         }
+
                         mSales.setPlateNumber(finalNumberPlate.getText().toString());
                         mSales.setVoucherNumber(finalVoucher.getText().toString());
                         mSales.setPaymentModeId(mPayment.getPaymentModeId());
@@ -255,7 +290,11 @@ public class FunctionalPayment implements PaymentAdapter.OnPaymentAdapter{
                             finalTel.setError("Invalid telephone");
                             return;
                         }
-                        mSales.setTelephone(finalTel.getText().toString());
+                        String msisdn = finalTel.getText().toString().replace("+","");
+                        if(!msisdn.substring(0,2).contains("250")){
+                            msisdn = "25"+msisdn;
+                        }
+                        mSales.setTelephone(msisdn);
                         mSales.setPaymentModeId(mPayment.getPaymentModeId());
                         mListener.onPaymentMethod(true, mSales);
                         extraDialog.dismiss();

@@ -49,7 +49,7 @@
                         android:paddingRight="@dimen/service_title_padding"
                         android:text="My payment"
                         android:textColor="@color/colorDarkGray"
-                        android:textSize="@dimen/misc_count"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <com.oltranz.pf.n_payfuel.utilities.views.MyLabel

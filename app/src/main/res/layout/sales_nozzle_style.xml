@@ -40,7 +40,7 @@
                         android:paddingLeft="@dimen/service_title_padding"
                         android:paddingRight="@dimen/service_title_padding"
                         android:text="Nozzle indexes"
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"/>
 
                     <ImageView
@@ -67,7 +67,7 @@
                         android:paddingRight="@dimen/service_title_padding"
                         android:text="My nozzle"
                         android:textColor="@color/colorBlack"
-                        android:textSize="21sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"/>
 
 

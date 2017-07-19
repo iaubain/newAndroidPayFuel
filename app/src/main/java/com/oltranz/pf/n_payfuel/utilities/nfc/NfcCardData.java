@@ -7,13 +7,15 @@ package com.oltranz.pf.n_payfuel.utilities.nfc;
 public class NfcCardData {
     private String serialNumber;
     private String payload;
+    private String msisdn;
 
     public NfcCardData() {
     }
 
-    public NfcCardData(String serialNumber, String payload) {
+    public NfcCardData(String serialNumber, String payload, String msisdn) {
         this.setSerialNumber(serialNumber);
         this.setPayload(payload);
+        this.setMsisdn(msisdn);
     }
 
     public String getSerialNumber() {
@@ -35,8 +37,16 @@ public class NfcCardData {
     @Override
     public String toString() {
         return "NfcCardData{" +
-                "serialNumber='" + serialNumber + '\'' +
-                ", payload='" + payload + '\'' +
+                "serialNumber='" + getSerialNumber() + '\'' +
+                ", payload='" + getPayload() + '\'' +
                 '}';
+    }
+
+    public String getMsisdn() {
+        return msisdn;
+    }
+
+    public void setMsisdn(String msisdn) {
+        this.msisdn = msisdn;
     }
 }

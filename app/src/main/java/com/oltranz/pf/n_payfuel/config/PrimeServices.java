@@ -27,7 +27,8 @@ import retrofit2.http.Path;
  * Created by Owner on 7/9/2016.
  */
 public interface PrimeServices {
-    String BASE_URL="http://41.186.53.35:8080/";
+    //String BASE_URL="http://41.186.53.35:8080/"; //Link to MTN server
+    String BASE_URL="http://41.74.172.131:8080/"; //Link to AOS server, production
     String LOGIN_URL="SpPayFuel/android/login";
     String REGISTER_URL="SpPayFuel/DeviceManagementService/device/register";
     String GET_PAYMENTS = "SpPayFuel/PaymentModeManagementService/paymentmodes/";

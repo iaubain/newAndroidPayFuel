@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.oltranz.pf.n_payfuel.R;
 import com.oltranz.pf.n_payfuel.models.pump.NozzleModel;
@@ -53,9 +54,7 @@ public class ChooseNozzleAdapter extends Adapter<ChooseNozzleAdapter.MyViewHolde
 
         if(nozzleModel.getStatus().equals("8")){
             holder.nozzleImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_nozzle_taken));
-            holder.nozzleImg.setClickable(false);
             holder.checkBox.setEnabled(false);
-            holder.nozzleName.setClickable(false);
             holder.nozzleName.setText(nozzleModel.getNozzleName() +" taken by, "+ (nozzleModel.getUserName() != null ? nozzleModel.getUserName() : "NO_NAME"));
         }else if (nozzleModel.getStatus().equals("7")){
             holder.nozzleImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_nozzle_default));
@@ -67,7 +66,7 @@ public class ChooseNozzleAdapter extends Adapter<ChooseNozzleAdapter.MyViewHolde
         holder.nozzleName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!nozzleModel.getStatus().equals("8"))
+                if(!nozzleModel.getStatus().equals("8")){
                 if(!holder.checkBox.isChecked()){
                     mListener.onChooseNozzle(true, pumpModel, nozzleModel);
                     holder.checkBox.setChecked(true);
@@ -79,13 +78,16 @@ public class ChooseNozzleAdapter extends Adapter<ChooseNozzleAdapter.MyViewHolde
                     nozzleModel.setStatus("7");
                     holder.checkBox.setChecked(false);
                 }
+                }else{
+                    Toast.makeText(context, "Taken by: "+(nozzleModel.getUserName() != null ? nozzleModel.getUserName() : "NO_NAME"), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         holder.nozzleImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!nozzleModel.getStatus().equals("8"))
+                if(!nozzleModel.getStatus().equals("8")){
                 if(!holder.checkBox.isChecked()){
                     mListener.onChooseNozzle(true, pumpModel, nozzleModel);
                     holder.checkBox.setChecked(true);
@@ -96,6 +98,9 @@ public class ChooseNozzleAdapter extends Adapter<ChooseNozzleAdapter.MyViewHolde
                     holder.nozzleImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_nozzle_default));
                     nozzleModel.setStatus("7");
                     holder.checkBox.setChecked(false);
+                }
+                }else{
+                    Toast.makeText(context, "Taken by: "+(nozzleModel.getUserName() != null ? nozzleModel.getUserName() : "NO_NAME"), Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -43,7 +43,7 @@ public class SalesNozzleAdapter extends Adapter<SalesNozzleAdapter.MyViewHolder>
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final MNozzle mNozzle = mNozzles.get(position);
-        holder.nozzleName.setText(mNozzle.getNozzleName());
+        holder.nozzleName.setText(mNozzle.getNozzleName()+" - "+mNozzle.getProductName());
         holder.nozzleIndex.setText(mNozzle.getIndexCount());
 
         holder.nozzleImg.setOnClickListener(new View.OnClickListener() {
