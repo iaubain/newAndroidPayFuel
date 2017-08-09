@@ -167,7 +167,6 @@ public class UserHome extends AppCompatActivity
         if (id == R.id.action_home) {
             fragmentHandler(getSalesModule());
         } else if (id == R.id.action_transaction) {
-
             fragmentHandler(getHistoryModule());
         } else if (id == R.id.action_report) {
             fragmentHandler(getReport());
