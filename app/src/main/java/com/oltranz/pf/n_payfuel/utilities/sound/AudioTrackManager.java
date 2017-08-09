@@ -45,7 +45,11 @@ public class AudioTrackManager {
                     AudioFormat.ENCODING_PCM_8BIT, length, AudioTrack.MODE_STREAM);
             wave=SinWave.sin(wave, waveLen, length);
             if(audioTrack!=null){
-                audioTrack.play();
+                try {
+                    audioTrack.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }else{
             return;

@@ -36,6 +36,7 @@ import com.oltranz.pf.n_payfuel.utilities.functional.TransactionValue;
 import com.oltranz.pf.n_payfuel.utilities.printing.TransactionPrint;
 import com.oltranz.pf.n_payfuel.utilities.services.TransactionRectifier;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -130,13 +131,16 @@ public class Sales extends Fragment implements SalesNozzleAdapter.OnChooseSellin
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
+        mNozzles = new ArrayList<>();
+        adapter = new SalesNozzleAdapter(this, getContext(), mNozzles);
+
         mNozzles = MNozzle.listAll(MNozzle.class);
         if(mNozzles.isEmpty()){
             mListener.onSalesModule(false, "Empty nozzle list.");
             return;
         }
 
-        adapter = new SalesNozzleAdapter(this, getContext(), mNozzles);
+        adapter.refreshAdapter(mNozzles);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         nozzleView.setLayoutManager(mLayoutManager);
         nozzleView.addItemDecoration(new GridSpacingItemDecoration(2, GridSpacingItemDecoration.dpToPx(getContext(), 2), true));

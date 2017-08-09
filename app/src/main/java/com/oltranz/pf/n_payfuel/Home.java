@@ -1,6 +1,10 @@
 package com.oltranz.pf.n_payfuel;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +12,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -16,7 +22,11 @@ import com.oltranz.pf.n_payfuel.config.InterActiveConfig;
 import com.oltranz.pf.n_payfuel.fragments.Login;
 import com.oltranz.pf.n_payfuel.fragments.Register;
 import com.oltranz.pf.n_payfuel.utilities.DataFactory;
+import com.oltranz.pf.n_payfuel.utilities.alarm.MyAlarmManager;
+import com.oltranz.pf.n_payfuel.utilities.tracker.TrackerService;
 import com.oltranz.pf.n_payfuel.utilities.views.MyLabel;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +45,9 @@ public class Home extends AppCompatActivity implements Login.OnLoginInteraction,
         setContentView(R.layout.home_layout);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+        //Initiate the tracking service
+        scheduleAlarm();
 
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
@@ -85,6 +98,20 @@ public class Home extends AppCompatActivity implements Login.OnLoginInteraction,
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("Resume", "Application called onResume");
+        scheduleAlarm();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("Destroy", "Application called onDestroy");
+        cancelAlarm();
+    }
+
     private void fragmentHandler(Object object) {
         Fragment fragment = (Fragment) object;
         String backStateName = fragment.getClass().getSimpleName();
@@ -119,6 +146,31 @@ public class Home extends AppCompatActivity implements Login.OnLoginInteraction,
             finish();
 
         }
+    }
+
+    public void scheduleAlarm() {
+
+        TelephonyManager tManager = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        Calendar cal = Calendar.getInstance();
+        Intent alarmIntent = new Intent(getApplicationContext(), TrackerService.class);
+        alarmIntent.setAction(TrackerService.ACTION_PING);
+        alarmIntent.putExtra(TrackerService.EXTRA_DEVICE_ID, Build.SERIAL);
+        alarmIntent.putExtra(TrackerService.EXTRA_DEVICE_IMEI, tManager.getDeviceId());
+
+        PendingIntent pIntent = PendingIntent.getService(getApplicationContext(),
+                MyAlarmManager.REQUEST_CODE,
+                alarmIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarm = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 9 * 1000, pIntent);
+    }
+
+    public void cancelAlarm() {
+        Intent intent = new Intent(getApplicationContext(), TrackerService.class);
+        final PendingIntent pIntent = PendingIntent.getBroadcast(this, MyAlarmManager.REQUEST_CODE,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarm.cancel(pIntent);
     }
 
     private Register getRegisterModule(){

@@ -112,7 +112,7 @@ public class NfcReader implements PiccInterface {
                     mListener.onNfcDraft(false, "Refreshing Exc");
                 } else if(msg.what == REFRESH_M){
                     byte[] serialNo = contactlessCard.getSerialNo();
-                    mListener.onNfcDraft(true, new NfcCardData(NfcParser.byte2String(serialNo), mPayLoad, null));
+                    //mListener.onNfcDraft(true, new NfcCardData(NfcParser.byte2String(serialNo), mPayLoad, null));
                 }
                 super.handleMessage(msg);
             }

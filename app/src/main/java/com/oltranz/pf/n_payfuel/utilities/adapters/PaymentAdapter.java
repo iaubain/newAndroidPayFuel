@@ -77,7 +77,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.MyViewHo
                 holder.pImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_payment_debt));
                 break;
             case AppFlow.PROPRIETARY_CARD:
-                holder.pImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_payment_spcard));
+                holder.pImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_proprietary_card));
                 break;
             default:
                 holder.pImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_payment));

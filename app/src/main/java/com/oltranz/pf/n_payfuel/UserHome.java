@@ -28,6 +28,7 @@ import com.oltranz.pf.n_payfuel.entities.MSales;
 import com.oltranz.pf.n_payfuel.fragments.HistorySales;
 import com.oltranz.pf.n_payfuel.fragments.Report;
 import com.oltranz.pf.n_payfuel.fragments.Sales;
+import com.oltranz.pf.n_payfuel.fragments.VoucherModule;
 import com.oltranz.pf.n_payfuel.models.login.LoginResponse;
 import com.oltranz.pf.n_payfuel.models.logout.LogoutRequest;
 import com.oltranz.pf.n_payfuel.utilities.DataFactory;
@@ -49,7 +50,8 @@ public class UserHome extends AppCompatActivity
         LogoutLoader.LogoutLoaderInteraction, Sales.OnSalesModuleInteraction,
         HistorySales.OnSalesHistory,
         Report.OnReportInteraction,
-        ResumeLoader.OnResumeLoader {
+        ResumeLoader.OnResumeLoader,
+        VoucherModule.OnVoucherModule {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.titleName)
@@ -176,6 +178,8 @@ public class UserHome extends AppCompatActivity
             }
         } else if (id == R.id.action_end_shift) {
             confirm("Do you really want to logout?");
+        } else if (id == R.id.action_voucher) {
+            fragmentHandler(getVoucherModule());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -186,21 +190,21 @@ public class UserHome extends AppCompatActivity
     @Override
     public void onPause() {
         super.onPause();
-        if(!isPaused){
-            ResumeLoader resumeLoader = new ResumeLoader(UserHome.this, UserHome.this, loginResponse);
-            resumeLoader.lockDevice();
-            isPaused = true;
-        }
+//        if(!isPaused){
+//            ResumeLoader resumeLoader = new ResumeLoader(UserHome.this, UserHome.this, loginResponse);
+//            resumeLoader.lockDevice();
+//            isPaused = true;
+//        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if(!isPaused){
-            ResumeLoader resumeLoader = new ResumeLoader(UserHome.this, UserHome.this, loginResponse);
-            resumeLoader.lockDevice();
-            isPaused = true;
-        }
+//        if(!isPaused){
+//            ResumeLoader resumeLoader = new ResumeLoader(UserHome.this, UserHome.this, loginResponse);
+//            resumeLoader.lockDevice();
+//            isPaused = true;
+//        }
     }
 
     private void popBox(String message){
@@ -303,6 +307,10 @@ public class UserHome extends AppCompatActivity
         return Sales.newInstance(DataFactory.objectToString(loginResponse));
     }
 
+    private VoucherModule getVoucherModule() {
+        return VoucherModule.newInstance(DataFactory.objectToString(loginResponse));
+    }
+
     private HistorySales getHistoryModule(){
         return HistorySales.newInstance(DataFactory.objectToString(loginResponse));
     }
@@ -371,5 +379,16 @@ public class UserHome extends AppCompatActivity
         if(!isDone)
             popBox((String) object);
         isPaused = false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onVoucherModule(boolean isDone, Object object) {
+        if (!isDone)
+            fragmentHandler(getSalesModule());
     }
 }

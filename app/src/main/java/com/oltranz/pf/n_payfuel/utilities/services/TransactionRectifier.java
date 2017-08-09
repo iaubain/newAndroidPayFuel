@@ -93,13 +93,13 @@ public class TransactionRectifier extends IntentService implements TransactionLo
 
             int serverTx = salesResponse.getStatusCode();
             String localTx = mSales.getStatus();
-            if(!(mPayment.getName().toLowerCase().contains("cash")||
-                    mPayment.getName().toLowerCase().contains("debt") ||
-                    mPayment.getName().toLowerCase().contains("voucher") ||
-                    mPayment.getName().toLowerCase().contains(" card"))){
-                mSales.setStatus(""+serverTx);
-                updateLocalTransaction(mSales);
-            }
+//            if(!(mPayment.getName().toLowerCase().contains("cash")||
+//                    mPayment.getName().toLowerCase().contains("debt") ||
+//                    mPayment.getName().toLowerCase().contains("voucher") ||
+//                    mPayment.getName().toLowerCase().contains(" card"))){
+//                mSales.setStatus(""+serverTx);
+//                updateLocalTransaction(mSales);
+//            }
 
             if(serverTx == 100){
                 mSales.setStatus(""+serverTx);

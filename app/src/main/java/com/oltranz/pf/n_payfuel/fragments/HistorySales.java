@@ -28,6 +28,7 @@ import com.oltranz.pf.n_payfuel.utilities.adapters.HistoryAdapter;
 import com.oltranz.pf.n_payfuel.utilities.loaders.LocalHistoryLoader;
 import com.oltranz.pf.n_payfuel.utilities.views.MyEdit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -94,8 +95,34 @@ public class HistorySales extends Fragment implements HistoryAdapter.OnHistoryIn
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
-        if(loginResponse == null)
+        if (loginResponse == null) {
             mListener.onSalesHistory(false, null);
+            return;
+        }
+        mSalesList = new ArrayList<>();
+        adapter = new HistoryAdapter(HistorySales.this, getContext(), mSalesList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        historyView.setLayoutManager(mLayoutManager);
+        historyView.setHasFixedSize(true);
+        historyView.setItemAnimator(new DefaultItemAnimator());
+        historyView.setAdapter(adapter);
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.filter(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         mProgress("Loading history");
         LocalHistoryLoader localHistoryLoader = new LocalHistoryLoader(HistorySales.this, loginResponse.getmUser().getUserId());
         localHistoryLoader.startLoading();
@@ -211,30 +238,7 @@ public class HistorySales extends Fragment implements HistoryAdapter.OnHistoryIn
             popBoxExit("Empty transaction list");
             return;
         }
-        this.mSalesList = mSalesList;
-        adapter = new HistoryAdapter(HistorySales.this, getContext(), mSalesList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        historyView.setLayoutManager(mLayoutManager);
-        historyView.setHasFixedSize(true);
-        historyView.setItemAnimator(new DefaultItemAnimator());
-        historyView.setAdapter(adapter);
-
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                adapter.filter(charSequence.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+        adapter.refreshAdapter(mSalesList);
     }
 
     public interface OnSalesHistory {
