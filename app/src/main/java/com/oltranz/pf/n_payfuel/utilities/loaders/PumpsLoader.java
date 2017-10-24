@@ -2,6 +2,8 @@ package com.oltranz.pf.n_payfuel.utilities.loaders;
 
 import android.content.Context;
 
+import com.oltranz.pf.n_payfuel.config.EquipmentServiceGenerator;
+import com.oltranz.pf.n_payfuel.config.EquipmentServices;
 import com.oltranz.pf.n_payfuel.config.PrimeServices;
 import com.oltranz.pf.n_payfuel.config.ServiceGenerator;
 import com.oltranz.pf.n_payfuel.models.commonmodels.CommonBranch;
@@ -41,8 +43,8 @@ public class PumpsLoader {
             String branchId = parms[0];
             try {
 
-                PrimeServices primeServices = ServiceGenerator.createService(PrimeServices.class, PrimeServices.BASE_URL);
-                Call<PumpResponse> callService = primeServices.getPumps(new CommonBranch(branchId));
+                EquipmentServices equipmentServices = EquipmentServiceGenerator.createService(EquipmentServices.class, EquipmentServices.BASE_URL);
+                Call<PumpResponse> callService = equipmentServices.getPumps(new CommonBranch(branchId));
                 callService.enqueue(new Callback<PumpResponse>() {
                     @Override
                     public void onResponse(Call<PumpResponse> call, Response<PumpResponse> response) {

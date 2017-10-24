@@ -16,9 +16,9 @@ import retrofit2.http.POST;
  * Created by Owner on 7/9/2016.
  */
 public interface TrackerClientServices<T> {
-    String BASE_URL = "http://41.74.172.132:8080/";
-    String POS_INFO_URL = "DeviceMonitor/informative/receiver/";
-    String POS_PING_URL = "DeviceMonitor/informative/ping/";
+    String BASE_URL = "http://postracker.oltranz.com/";
+    String POS_INFO_URL = "informative/receiver/";
+    String POS_PING_URL = "informative/ping/";
 
     //    Ping info url
     @POST(TrackerClientServices.POS_PING_URL)

@@ -12,4 +12,5 @@ public class AppFlow {
     public static final String QUANTITY_MEASURE_SHORT = "L";
     public static final String PROPRIETARY_CARD = "sp card";
     public static final int MAX_HISTORY = 6;
+    public static final String APP_DESC = "EngenPf";
 }

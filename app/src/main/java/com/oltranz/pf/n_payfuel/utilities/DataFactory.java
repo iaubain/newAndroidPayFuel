@@ -103,6 +103,11 @@ public class DataFactory {
 
     public static MNozzle tuneNozzle(NozzleModel nozzleModel, MPump mPump){
         try{
+            if((nozzleModel.getProductId() == null || nozzleModel.getProductId().isEmpty()) ||
+                    (nozzleModel.getProductName() == null || nozzleModel.getProductName().isEmpty()) ||
+                    (nozzleModel.getUnitPrice() == null || nozzleModel.getUnitPrice().isEmpty()))
+                return null;
+
             return new MNozzle(nozzleModel.getNozzleId(),
                     nozzleModel.getNozzleName(),
                     nozzleModel.getIndexCount(),

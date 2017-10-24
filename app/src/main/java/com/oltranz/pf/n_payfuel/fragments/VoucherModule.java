@@ -254,12 +254,12 @@ public class VoucherModule extends Fragment implements SalesNozzleAdapter.OnChoo
         if (voucher.getVoucherAmount() != null) {
             amount = voucher.getVoucherAmount() + "";
         }
-        if (voucher.getCustomerMerchant() != null) {
-            if (voucher.getCustomerMerchant().getCustomer() != null)
-                customer = voucher.getCustomerMerchant().getCustomer().getName();
+        if (voucher.getMerchantCustomer() != null) {
+            if (voucher.getMerchantCustomer().getCustomer() != null)
+                customer = voucher.getMerchantCustomer().getCustomer().getName();
 
-            if (voucher.getCustomerMerchant().getMerchant() != null)
-                provided = voucher.getCustomerMerchant().getMerchant().getName();
+            if (voucher.getMerchantCustomer().getMerchant() != null)
+                provided = voucher.getMerchantCustomer().getMerchant().getName();
         }
 
         DateFormat dFormat = new java.text.SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -310,7 +310,7 @@ public class VoucherModule extends Fragment implements SalesNozzleAdapter.OnChoo
                 tempSales.setTin("");
                 tempSales.setPlateNumber("");
                 try {
-                    tempSales.setName(voucher.getCustomerMerchant().getCustomer().getName());
+                    tempSales.setName(voucher.getMerchantCustomer().getCustomer().getName());
                 } catch (Exception e) {
                     e.printStackTrace();
                     tempSales.setName("");

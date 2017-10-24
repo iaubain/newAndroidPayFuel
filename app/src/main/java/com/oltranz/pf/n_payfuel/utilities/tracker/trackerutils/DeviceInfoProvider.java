@@ -133,16 +133,22 @@ public class DeviceInfoProvider {
         }
 
         String deviceSerial = Build.SERIAL;
-        MSoftware mSoftware = new MSoftware(deviceSerial,
-                user != null ? user.getName() : "NO_ACTIVE_USER", lastActivity, AppConfig.APP_DESC, accessDate);
-
         List<MDevice> mDevices = MDevice.listAll(MDevice.class);
         MDevice mDevice = null;
         if (!mDevices.isEmpty()) {
-            mDevice = mDevices.get(0);
+            mDevice = mDevices.get(mDevices.size()-1);
         }
-        String deviceName = mDevice == null ? "NO_REGISTERED_DEVICE" : mDevice.getDeviceName() == null ? Build.SERIAL : mDevice.getDeviceName();
+
+        String deviceName = "NO_REGISTERED_DEVICE";// : mDevice.getDeviceName() == null ? Build.SERIAL : mDevice.getDeviceName();
+        if(mDevice != null)
+            if(mDevice.getDeviceName() != null)
+                deviceName = mDevice.getDeviceName();
+            else
+                deviceName = Build.SERIAL;
         String activeUser = user != null ? user.getName() != null ? user.getName() : "NO_ACTIVE_USER" : "NO_USER_FOUND";
+
+        MSoftware mSoftware = new MSoftware(deviceName,
+                user != null ? user.getName() : "NO_ACTIVE_USER", lastActivity, AppConfig.APP_DESC, accessDate);
 
         Log.v("Software", "Software Device: " + deviceName + " Active User: " + activeUser + " Last User Activity: " + lastActivity + " Access: " + accessDate);
         return mSoftware;

@@ -65,9 +65,9 @@ public class TransactionRectifier extends IntentService implements TransactionLo
 
     private void postPendingTransaction() {
         List<MSales> mSalesList = DbBulk.getPendingTransaction();
-        if(mSalesList.isEmpty())
+        if (mSalesList.isEmpty())
             return;
-        for(MSales mSales : mSalesList){
+        for (MSales mSales : mSalesList) {
             TransactionLoader transactionLoader = new TransactionLoader(TransactionRectifier.this, mSales);
             transactionLoader.startLoading();
         }
@@ -75,18 +75,18 @@ public class TransactionRectifier extends IntentService implements TransactionLo
 
     @Override
     public void onTransactionLoader(boolean isDone, int serverStatus, String message, MSales mSales, SalesResponse salesResponse) {
-        if(!isDone){
-            Toast.makeText(getApplicationContext(), "("+serverStatus+") "+message, Toast.LENGTH_SHORT).show();
+        if (!isDone) {
+            Toast.makeText(getApplicationContext(), "(" + serverStatus + ") " + message, Toast.LENGTH_SHORT).show();
             return;
         }
         try {
             mSales = DbBulk.getTransaction(mSales.getDeviceTransactionId());
-            if(mSales == null || mSales.getStatus().isEmpty()){
+            if (mSales == null || mSales.getStatus().isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Failed to get local transaction", Toast.LENGTH_SHORT).show();
                 return;
             }
             MPayment mPayment = DbBulk.getPayment(mSales.getPaymentModeId());
-            if(mPayment == null){
+            if (mPayment == null) {
                 Toast.makeText(getApplicationContext(), "Failed to get local payment methods", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -101,73 +101,73 @@ public class TransactionRectifier extends IntentService implements TransactionLo
 //                updateLocalTransaction(mSales);
 //            }
 
-            if(serverTx == 100){
-                mSales.setStatus(""+serverTx);
+            if (serverTx == 100) {
+                mSales.setStatus("" + serverTx);
                 updateLocalTransaction(mSales);
-                if(localTx.equals(StatusConfig.PRINT_AFTER_PENDING)){
+                if (localTx.equals(StatusConfig.PRINT_AFTER_PENDING)) {
                     generateReceipt(mSales);
-                }else if(localTx.equals(StatusConfig.FAILURE)){
+                } else if (localTx.equals(StatusConfig.FAILURE)) {
                     generateReceipt(mSales);
                 }
-            }else if(serverTx == 301){
-                if(!localTx.equals(StatusConfig.PENDING) && !localTx.equals(StatusConfig.PRINT_AFTER_PENDING)) {
-                    mSales.setStatus(""+serverTx);
+            } else if (serverTx == 301) {
+                if (!localTx.equals(StatusConfig.PENDING) && !localTx.equals(StatusConfig.PRINT_AFTER_PENDING)) {
+                    mSales.setStatus("" + serverTx);
                     updateLocalTransaction(mSales);
                 }
-            }else if(serverTx == 500){
-                    if(mPayment.getName().toLowerCase().contains("tigo") ||
-                            mPayment.getName().toLowerCase().contains("mtn") ||
-                            mPayment.getName().toLowerCase().contains("airtel")){
-                        mSales.setStatus(""+serverTx);
-                        updateLocalTransaction(mSales);
-                    }
+            } else if (serverTx == 500) {
+                if (mPayment.getName().toLowerCase().contains("tigo") ||
+                        mPayment.getName().toLowerCase().contains("mtn") ||
+                        mPayment.getName().toLowerCase().contains("airtel")) {
+                    mSales.setStatus("" + serverTx);
+                    updateLocalTransaction(mSales);
+                }
                 decrementIndex(DbBulk.getNozzle(mSales.getNozzleId()), mSales.getQuantity());
-            }else{
-                Toast.makeText(getApplicationContext(), "("+serverStatus+") "+message, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "(" + serverStatus + ") " + message, Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void updateLocalTransaction(MSales mSales){
+    private void updateLocalTransaction(MSales mSales) {
         long persistResult = mSales.save();
-        if(persistResult < 0){
+        if (persistResult < 0) {
             Toast.makeText(getApplicationContext(), "Local DB error.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void generateReceipt(MSales mSales){
-        try{
+    private void generateReceipt(MSales mSales) {
+        try {
             TransactionPrint transactionPrint = new TransactionPrint(TransactionRectifier.this, getApplicationContext(), mSales);
             transactionPrint.generateReceipt();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Printing Error: "+e.getCause(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Printing Error: " + e.getCause(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void decrementIndex(MNozzle nozzle, String value){
+    private void decrementIndex(MNozzle nozzle, String value) {
         try {
             double currentIndex = Double.valueOf(nozzle.getIndexCount());
             double reduceValue = Double.valueOf(value);
-            if(currentIndex > reduceValue){
-                Double newIndex=currentIndex - reduceValue;
-                nozzle.setIndexCount(""+newIndex);
-            }else{
-                nozzle.setIndexCount(""+0.0);
+            if (currentIndex > reduceValue) {
+                Double newIndex = currentIndex - reduceValue;
+                nozzle.setIndexCount("" + newIndex);
+            } else {
+                nozzle.setIndexCount("" + 0.0);
             }
             nozzle.save();
             Intent i = new Intent(TransactionRectifier.NOZZLE_BROADCAST_FILTER).setAction(TransactionRectifier.NOZZLE_BROADCAST_ACTION);
             getApplicationContext().sendBroadcast(i);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onPrintResult(String printingMessage) {
-        Toast.makeText(getApplicationContext(), "Printer: "+printingMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Printer: " + printingMessage, Toast.LENGTH_SHORT).show();
     }
 }

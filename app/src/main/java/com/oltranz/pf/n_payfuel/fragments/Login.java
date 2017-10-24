@@ -65,7 +65,8 @@ public class Login extends Fragment implements AuthLoader.AuthLoaderInteraction,
         PaymentsLoader.PaymentLoaderInteraction,
         PumpsLoader.PumpsLoaderInteraction,
         ChoosePumpAdapter.OnChoosePumpInteraction,
-        ChooseNozzleAdapter.OnChooseNozzleInteraction, ReserveLoader.ReserveLoaderInteraction {
+        ChooseNozzleAdapter.OnChooseNozzleInteraction,
+        ReserveLoader.ReserveLoaderInteraction {
 
     @BindView(R.id.pin)
     MyEdit pin;

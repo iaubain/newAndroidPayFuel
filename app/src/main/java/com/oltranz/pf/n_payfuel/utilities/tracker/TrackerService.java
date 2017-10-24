@@ -1,5 +1,4 @@
 package com.oltranz.pf.n_payfuel.utilities.tracker;
-
 import android.app.IntentService;
 import android.content.Context;
 import android.content.DialogInterface;

@@ -28,14 +28,12 @@ import retrofit2.http.Path;
  */
 public interface PrimeServices {
     //String BASE_URL="http://41.186.53.35:8080/"; //Link to MTN server
-    String BASE_URL="http://41.74.172.131:8080/"; //Link to AOS server, production
-    String LOGIN_URL="SpPayFuel/android/login";
-    String REGISTER_URL="SpPayFuel/DeviceManagementService/device/register";
-    String GET_PAYMENTS = "SpPayFuel/PaymentModeManagementService/paymentmodes/";
-    String GET_PUMPS = "SpEquipment/pump/pumpDash";
-    String RESERVE_PUMP = "SpEquipment/assign/create";
-    String LOGOUT_URL = "SpPayFuel/android/logout";
-    String SALES_URL = "SpPayFuel/android/sale";
+    String BASE_URL="http://sppos.oltranz.com/"; //Link to AOS server, production
+    String LOGIN_URL="android/login";
+    String REGISTER_URL="DeviceManagementService/device/register";
+    String GET_PAYMENTS = "PaymentModeManagementService/paymentmodes/";
+    String LOGOUT_URL = "android/logout";
+    String SALES_URL = "android/sale";
 
     @POST(PrimeServices.LOGIN_URL)
     Call<LoginResponse> login(@Body LoginRequest login);
@@ -48,12 +46,6 @@ public interface PrimeServices {
 
     @GET(PrimeServices.GET_PAYMENTS+"{userId}")
     Call<PaymentsResponse> getPaymentsMode(@Path("userId") String userId);
-
-    @POST(PrimeServices.GET_PUMPS)
-    Call<PumpResponse> getPumps(@Body CommonBranch commonBranch);
-
-    @POST(PrimeServices.RESERVE_PUMP)
-    Call<ReserveResponse> reservePump(@Body List<ReserveModel> reserveRequest);
 
     @POST(PrimeServices.SALES_URL)
     Call<SalesResponse> postSales(@Body SalesRequest salesRequest);
